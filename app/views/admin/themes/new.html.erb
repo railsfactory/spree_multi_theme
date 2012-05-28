@@ -1,0 +1,12 @@
+<div class="theme_panel">
+Select Your Theme:
+<%=form_for(:theme_object,:url=>"/admin/themes",:html=>{:method => "post" }) do |theme|%>
+<%@options.each do |option|%>
+<%= radio_button_tag "option" ,"#{option}", APP_THEME['theme'] == option,:class=>"theme_options"%> <%=option%><br />
+<%end%>
+<%=theme.submit "Apply Theme"%>
+<%end%>
+</div>
+
+
+

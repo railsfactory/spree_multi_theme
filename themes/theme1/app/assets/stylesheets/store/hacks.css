@@ -1,0 +1,6 @@
+.mac input[type="radio"], .mac input[type="checkbox"], .mac .payment_address .check_wrap input{margin:1px 0  0 1px;}
+.ie7 .addtocart-btns .btns-left{float:right;}
+.ie7 .addtocart-btns .button.continue{line-height:15px;}
+.ie7 .addtocart-btns .button.checkout{line-height:15px;}
+.ie7 .chckbox-wrap span{display:block; float:left; line-height:16px;}
+.ie7 .myacct-edit{overflow:hidden;}

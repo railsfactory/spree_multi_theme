@@ -1,0 +1,184 @@
+<style>
+#div.inner input[type=text], div.inner select { width: 80%; }
+.hidden { display: none; }
+</style>
+
+<div class="columns alpha six payment_address" data-hook="billing_fieldset_wrapper">
+<fieldset id="billing" data-hook>
+  <%= form.fields_for :bill_address do |bill_form| %>
+    <h4 class="sechead"><%= t(:billing_address) %></h4>
+    <div class="inner secinblock" data-hook="billing_inner">
+      <div class="field_wrap" id="bfirstname">
+        <%= bill_form.label :firstname, "#{t(:first_name)} <span class='req'>*</span>".html_safe %>
+       <div class="input_wrap" > <%= bill_form.text_field :firstname, :class => 'required txtinput' , :maxlength => 30 %></div>
+      </div>
+      <div class="field_wrap" id="blastname">
+        <%= bill_form.label :lastname, "#{t(:last_name)} <span class='req'>*</span>".html_safe %>
+        <div class="input_wrap" > <%= bill_form.text_field :lastname, :class => 'required txtinput' , :maxlength => 30 %> </div>
+      </div>
+      <% if Spree::Config[:company] %>
+        <div class="field_wrap" id="bcompany">
+          <%= bill_form.label :company,  "#{ t(:company)} <span class='req'>*</span>".html_safe %>
+         <div class="input_wrap" >  <%= bill_form.text_field :company,:class=>"txtinput" %> </div>
+        </div>
+      <% end %>
+      <div class="field_wrap" id="baddress1">
+        <%= bill_form.label :address1, "#{ t(:street_address)} <span class='req'>*</span>".html_safe  %>
+      <div class="input_wrap" >   <%= bill_form.text_field :address1, :class => 'required txtinput' %> </div>
+      </div>
+      <div class="field_wrap" id="baddress2">
+        <%= bill_form.label :address2,  "#{ t(:street_address_2)} ".html_safe %>
+        <div class="input_wrap" > <%= bill_form.text_field :address2 ,:class=>"txtinput"%> </div>
+      </div>
+
+      <div class="field_wrap" id="bcity">
+        <%= bill_form.label :city, "#{t(:city)} <span class='req'>*</span>".html_safe   %>
+       <div class="input_wrap" >  <%= bill_form.text_field :city, :class => 'required txtinput' %> </div>
+      </div>
+
+      <p class="field_wrap" id="bcountry">
+        <%= bill_form.label :country_id,"#{  t(:country) } <span class='req'>*</span> ".html_safe %>
+        <span id="bcountry" class="input_wrap">
+          <%= bill_form.collection_select :country_id, available_countries, :id, :name, {}, {:class => 'required txtselect state_fld'} %>
+        </span>
+      </p>
+
+      <% if Spree::Config[:address_requires_state] %>
+        <p class="field_wrap " id="bstate">
+          <% have_states = !order.bill_address.country.states.empty? %>
+          <%= bill_form.label :state,"#{   t(:state) } <span class='req'>*</span> ".html_safe %>
+          <noscript>
+            <div class="input_wrap" ><%= bill_form.text_field :state_name, :class => 'required ' %></div>
+          </noscript>
+          <% state_elements = [
+             bill_form.collection_select(:state_id, order.bill_address.country.states,
+                                :id, :name,
+                                {:include_blank => true},
+                                {:class => have_states ? 'required txtselect state_fld' : 'txtselect state_fld hidden',
+                                :disabled => !have_states}) +
+             bill_form.text_field(:state_name,
+                                :class => !have_states ? 'required txtinput' : 'txtinput required hidden',
+                                :disabled => have_states)
+             ].join.gsub('"', "'").gsub("\n", "")
+          %>
+          <%= javascript_tag do -%>
+            document.write("<%== state_elements %>");
+          <% end -%>
+        </p>
+      <% end %>
+
+      <div class="field_wrap" id="bzipcode">
+        <%= bill_form.label :zipcode, "#{  t(:zip)} <span class='req'>*</span> ".html_safe %>
+        <div class="input_wrap" ><%= bill_form.text_field :zipcode, :class => 'required txtinput digits' %></div>
+      </div>
+      <div class="field_wrap" id="bphone">
+        <%= bill_form.label :phone,  "#{t(:phone)} <span class='req'>*</span> ".html_safe %>
+        <div class="input_wrap" ><%= bill_form.text_field :phone, :class => 'required txtinput digits' %></div>
+      </div>
+      <% if Spree::Config[:alternative_billing_phone] %>
+        <div class="field_wrap" id="baltphone">
+          <%= bill_form.label :alternative_phone, "#{ t(:alternative_phone)} ".html_safe %>
+          <div class="input_wrap" ><%= bill_form.text_field :alternative_phone %></div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</fieldset>
+</div>
+<br />
+<div class="columns omega six payment_address" data-hook="shipping_fieldset_wrapper">
+<fieldset id="shipping" data-hook>
+  <%= form.fields_for :ship_address do |ship_form| %>
+    <h4 class="sechead"><%= t(:shipping_address) %></h4><br />
+    <div class="check_wrap checkbox" data-hook="use_billing">
+      <%= check_box_tag 'order[use_billing]', '1', (!(order.bill_address.empty? && order.ship_address.empty?) && order.bill_address.same_as?(order.ship_address)) %>
+    <p>
+    <%= t("use_billing_address") %>
+    </p>
+    </div>
+    <div class="inner secinblock" data-hook="shipping_inner">
+      <div class="field_wrap" id="sfirstname">
+        <%= ship_form.label :firstname, "#{t(:first_name)} <span class='req'>*</span>".html_safe %>
+       <div class="input_wrap" > <%= ship_form.text_field :firstname, :class => 'required txtinput' , :maxlength => 30%></div>
+      </div>
+      <div class="field_wrap" id="slastname">
+        <%= ship_form.label :lastname, "#{t(:last_name)} <span class='req'>*</span>".html_safe %>
+        <div class="input_wrap" > <%= ship_form.text_field :lastname, :class => 'required txtinput' , :maxlength => 30%> </div>
+      </div>
+      <% if Spree::Config[:company] %>
+        <div class="field_wrap" id="scompany">
+          <%= ship_form.label :company,  "#{ t(:company)} <span class='req'>*</span>".html_safe %>
+         <div class="input_wrap" >  <%= ship_form.text_field :company,:class=>"txtinput" %> </div>
+        </div>
+      <% end %>
+      <div class="field_wrap" id="saddress1">
+        <%= ship_form.label :address1, "#{ t(:street_address)} <span class='req'>*</span>".html_safe  %>
+      <div class="input_wrap" >   <%= ship_form.text_field :address1, :class => 'required txtinput' %> </div>
+      </div>
+      <div class="field_wrap" id="saddress2">
+        <%= ship_form.label :address2,  "#{ t(:street_address_2)} ".html_safe %>
+        <div class="input_wrap" > <%= ship_form.text_field :address2 ,:class=>"txtinput"%> </div>
+      </div>
+
+      <div class="field_wrap" id="scity">
+        <%= ship_form.label :city, "#{t(:city)} <span class='req'>*</span>".html_safe   %>
+       <div class="input_wrap" >  <%= ship_form.text_field :city, :class => 'required txtinput' %> </div>
+      </div>
+
+      <p class="field_wrap" id="scountry">
+        <%= ship_form.label :country_id,  "#{t(:country)} <span class='req'>*</span>".html_safe   %>
+        <span id="scountry">
+          <%= ship_form.collection_select :country_id, available_countries, :id, :name, {}, {:class => 'required txtselect state_fld'} %>
+        </span>
+      </p>
+
+      <% if Spree::Config[:address_requires_state] %>
+        <p class="field_wrap" id="sstate">
+          <% have_states = !order.ship_address.country.states.empty? %>
+          <%= ship_form.label :state, "#{ t(:state) } <span class='req'>*</span>".html_safe %>
+          <noscript>
+            <%= ship_form.text_field :state_name, :class => 'required' %>
+          </noscript>
+          <% state_elements = [
+             ship_form.collection_select(:state_id, order.ship_address.country.states,
+                                :id, :name,
+                                {:include_blank => true},
+                                {:class => have_states ? 'required txtselect state_fld' : 'txtselect state_fld hidden',
+                                :disabled => !have_states}) +
+             ship_form.text_field(:state_name,
+                                :class => !have_states ? 'txtinput' : 'txtinput hidden',
+                                :disabled => have_states)
+             ].join.gsub('"', "'").gsub("\n", "")
+          %>
+          <%= javascript_tag do -%>
+            document.write("<%== state_elements %>");
+          <% end %>
+        </p>
+      <% end %>
+
+      <div class="field_wrap" id="szipcode">
+        <%= ship_form.label :zipcode, "#{  t(:zip)  } <span class='req'>*</span>".html_safe %>
+        <div class="input_wrap" ><%= ship_form.text_field :zipcode, :class => 'required txtinput digits' %></div>
+      </div>
+      <div class="field_wrap" id="sphone">
+        <%= ship_form.label :phone, "#{ t(:phone) } <span class='req'>*</span>".html_safe  %>
+        <div class="input_wrap" ><%= ship_form.text_field :phone, :class => 'required txtinput digits' %></div>
+      </div>
+      <% if Spree::Config[:alternative_shipping_phone] %>
+        <div class="field_wrap" id="saltphone">
+          <%= ship_form.label :alternative_phone, t(:alternative_phone) %>
+          <div class="input_wrap" ><%= ship_form.text_field :alternative_phone,:class=>"txtinput" %></div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</fieldset>
+<br />
+</div>
+<div class="form-buttons">
+  <input type="submit" class="continue button primary" value="<%=t("save_and_continue") %>" />
+</div>
+
+<br />
+
+<hr class="space" />

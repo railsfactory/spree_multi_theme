@@ -1,0 +1,56 @@
+<%= form_for :order, :url => populate_orders_url do |f| %>
+  <div id="inside-product-cart-form" data-hook="inside_product_cart_form" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+
+    <% if product.has_variants? %>
+      <div id="product-variants" class="columns five alpha">
+        <h2 class="product-section-title"><%= t(:variants) %></h2>
+        <ul>
+          <% has_checked = false
+          product.variants.active.each_with_index do |v,index|
+            next if v.option_values.empty? || (!v.in_stock && !Spree::Config[:show_zero_stock_products])
+            checked = !has_checked && (v.in_stock || Spree::Config[:allow_backorders])
+            has_checked = true if checked %>
+            <li>
+              <label for="<%= ['products', product.id, v.id].join('_') %>">
+                <%= radio_button_tag "products[#{product.id}]", v.id, checked,:class=>"product_variants", :disabled => !v.in_stock && !Spree::Config[:allow_backorders] %>
+                <span class="variant-description">
+                  <%= variant_options v %>
+                </span>
+                <% if variant_price_diff v %>
+                  <span class="price diff"><%= variant_price_diff v %></span>
+                <% end %>
+              </label>
+            </li>
+          <% end%>
+        </ul>
+      </div>
+    <% end%>
+
+    <% if product.price %>
+      <div data-hook="product_price" class="columns five <% if !product.has_variants? %> alpha <% else %> omega <% end %>">
+
+        <div id="product-price" class="price-enlarge-buy">
+          <p class="prices"><span></span><%= number_to_currency product.price %></p>
+          <div class="pcount">
+      <% if product.has_stock? || Spree::Config[:allow_backorders] %>
+      <label>Qty:</label><%= text_field_tag (product.has_variants? ? :quantity : "variants[#{product.master.id}]"),1, :class => "txtbox", :size => 3 ,:maxlength=>4%>
+      <% end %>
+    </div>
+    </div>
+        <div class="add-to-cart">
+          <% if product.has_stock? || Spree::Config[:allow_backorders] %>
+
+                <%=submit_tag t('add_to_cart'),:class=>"continue button primary"%>
+
+              <%#= t(:add_to_cart) %>
+            <%# end %>
+          <% else %>
+            <%= content_tag('strong', t(:out_of_stock)) %>
+          <% end %>
+        </div>
+
+      </div>
+    <% end %>
+
+  </div>
+<% end %>
