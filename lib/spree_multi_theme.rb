@@ -16,7 +16,6 @@ module SpreeOdgTheme
     paths["app/assets"] << "themes/#{@current_theme}/app/assets"
     paths["app/views"] << "themes/#{@current_theme}/app/views"
     paths["vendor/assets"] << "themes/#{@current_theme}/vendor/assets"
-    system("bundle exec rake assets:precompile")
     config.to_prepare &method(:activate).to_proc
   end
 end
