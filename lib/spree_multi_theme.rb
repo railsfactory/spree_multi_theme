@@ -1,8 +1,8 @@
-module SpreeOdgTheme
+module SpreeMultiTheme
   class Engine < Rails::Engine
     APP_THEME = YAML.load_file("config/settings.yml")
-    %x{for m in "`ls ../spree_odg_theme/themes`"; do echo "options: \\"$m\\"" > ../spree_odg_theme/config/themes.yml ; done}
-    railtie_name "spree_odg_theme"
+    %x{for m in "`ls ../spree_multi_theme/themes`"; do echo "options: \\"$m\\"" > ../spree_multi_theme/config/themes.yml ; done}
+    railtie_name "spree_multi_theme"
     @current_theme = APP_THEME['theme']
     @current_theme = 'theme1' if  @current_theme.empty?
 
