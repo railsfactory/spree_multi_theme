@@ -20,8 +20,8 @@
 		 p 44444444444444444444444444444444444444444444
 		 #~ p paths["app/assets"]
 		 #~ config.autoload_paths = File.expand_path("../../../../lib/spree_odg_theme", __FILE__)
-		 load File.expand_path("../../../../lib/spree_odg_theme.rb", __FILE__)
-		 load File.expand_path("../../../../config/initializers/load_config.rb", __FILE__)
+		 #~ load File.expand_path("../../../../lib/spree_odg_theme.rb", __FILE__)
+		 #~ load File.expand_path("../../../../config/initializers/load_config.rb", __FILE__)
 		 #~ %x{for m in "`ls ../spree_odg_theme/themes`"; do echo "options: \\"$m\\"" > ../spree_odg_theme/config/themes.yml ; done}
 		 #~ system "rake assets:clean"
 		 #~ system "rake assets:precompile"
