@@ -16,6 +16,10 @@ module SpreeMultiTheme
     paths["app/assets"] << "themes/#{@current_theme}/app/assets"
     paths["app/views"] << "themes/#{@current_theme}/app/views"
     paths["vendor/assets"] << "themes/#{@current_theme}/vendor/assets"
+    
+        p "I am in lib file"
+    p paths["app/assets"]
+    
     config.to_prepare &method(:activate).to_proc
   end
 end
