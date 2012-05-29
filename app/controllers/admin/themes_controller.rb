@@ -10,13 +10,10 @@
 	 # Theme name is write into sandbox/config/*.yml file
 	 def create
 		 system "echo theme: \\'#{params[:option]}\\' >  #{Rails.root}/config/settings.yml"
-		 Rails.env
-		 if Rails.env != "production"
-			 #~ pid=%x{cat tmp/pids/server.pid}
-			 #~ system "kill -9 #{pid}"
+		 if Rails.env == "production"
+			system "touch #{Rails.root}/tmp/restart.txt"
 		 else
 			 #~ system "bundle exec rake assets:clean"
-			 #~ system "touch #{Rails.root}/tmp/restart.txt"
 		 end
 		 p 44444444444444444444444444444444444444444444
 		 #~ p paths["app/assets"]

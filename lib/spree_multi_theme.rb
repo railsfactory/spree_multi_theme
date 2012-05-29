@@ -1,7 +1,9 @@
 module SpreeMultiTheme
   class Engine < Rails::Engine
     APP_THEME = YAML.load_file("config/settings.yml")
-    %x{for m in "`ls ../spree_multi_theme/themes`"; do echo "options: \\"$m\\"" > ../spree_multi_theme/config/themes.yml ; done}
+    #~ %x{for m in "`ls ../spree_multi_theme/themes`"; do echo "options: \\"$m\\"" > ../spree_multi_theme/config/themes.yml ; done}
+    %x{for m in "`ls`"; do echo "options: \\"$m\\""; done}
+    p %x{for m in "`ls`"; do echo "options: \\"$m\\""; done}
     railtie_name "spree_multi_theme"
     @current_theme = APP_THEME['theme']
     @current_theme = 'theme1' if  @current_theme.empty?
@@ -16,9 +18,6 @@ module SpreeMultiTheme
     paths["app/assets"] << "themes/#{@current_theme}/app/assets"
     paths["app/views"] << "themes/#{@current_theme}/app/views"
     paths["vendor/assets"] << "themes/#{@current_theme}/vendor/assets"
-    
-        p "I am in lib file"
-    p paths["app/assets"]
     
     config.to_prepare &method(:activate).to_proc
   end
