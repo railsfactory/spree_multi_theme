@@ -9,7 +9,7 @@ Deface::Override.new(:virtual_path => %q{spree/shared/_products},
       <li id="product_<%= product.id %>" class="col-left-wrap  columns three <%= cycle("alpha", "secondary", "", "omega secondary")%> col-left-wrap #{index%2==0 ? "" : "right-side"}" data-hook="products_list_item" itemscope itemtype="http://schema.org/Product">
 			<div class="coll-left">
         <div class="product-image coll-img">
-          <%= link_to large_image(product,:width=>"184",:height=>"116", :itemprop => "image"), product, :itemprop => 'url'"116" %>
+          <%= link_to product_image(product,:width=>"184",:height=>"116", :itemprop => "image"), product, :itemprop => 'url'"116" %>
         </div>
 						<div class="coll-info">
 										
