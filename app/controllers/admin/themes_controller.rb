@@ -15,7 +15,7 @@
 			 #~ pid=%x{cat tmp/pids/server.pid}
 			 #~ system "kill -9 #{pid}"
 		 else
-			 system "bundle exec rake assets:clean"
+			 #~ system "bundle exec rake assets:clean"
 			 #~ system "touch #{Rails.root}/tmp/restart.txt"
 		 end
 		 p 44444444444444444444444444444444444444444444
