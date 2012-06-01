@@ -1,6 +1,13 @@
 module SpreeMultiTheme
   class Engine < Rails::Engine
-    APP_THEME = YAML.load_file("config/settings.yml")
+
+    begin
+     APP_THEME = YAML.load_file("config/settings.yml")
+    rescue
+     text='theme: " "'
+     File.open("config/settings.yml", 'w') {|f| f.write(text) }
+     APP_THEME = YAML.load_file("config/settings.yml")
+  end
     %x{for m in "`ls #{File.expand_path('../../themes',__FILE__)}`"; do echo "options: \\"$m\\"" > #{File.expand_path('../../config/themes.yml',__FILE__)} ; done}
 
     railtie_name "spree_multi_theme"
