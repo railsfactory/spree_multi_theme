@@ -1,7 +1,7 @@
 SUMMARY
 -------
 
-Olive Drab Green Theme is a standalone theme for Spree Commerce version 1.1.0.
+Spree Multi Theme is a standalone theme for Spree Commerce version 1.1.0.
 
 This theme is now being used as the base theme for SpreeUI demo store:
 
@@ -21,11 +21,15 @@ Run bunlder:
 
     $ bundle install
 
-Install assets:
+Then Start The servers:
 
-    $ rails g spree_multi_theme:install
+    $ rails s
 
 Optional: Clear out precompiled assets (required for install in sandbox):
 
     $ rake assets:clean
+
+Description: 
+   
+    Following the link "localhost:3000/admin" You can see the Theme tab according to the theme list you can select the theme.
 
