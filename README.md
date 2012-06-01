@@ -31,5 +31,5 @@ Optional: Clear out precompiled assets (required for install in sandbox):
 
 Description: 
    
-    Following the link "localhost:3000/admin" You can see the Theme tab according to the theme list you can select the theme.
+    Following the link "http://spreeui.railsfactory.com/admin" You can see the Theme tab according to the theme list you can select the theme.
 
