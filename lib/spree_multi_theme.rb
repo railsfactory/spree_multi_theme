@@ -2,11 +2,11 @@ module SpreeMultiTheme
   class Engine < Rails::Engine
 
     begin
-     APP_THEME = YAML.load_file("config/settings.yml")
+     APP_THEME = YAML.load_file("config/multi_theme_settings.yml")
     rescue
      text='theme: " "'
-     File.open("config/settings.yml", 'w') {|f| f.write(text) }
-     APP_THEME = YAML.load_file("config/settings.yml")
+     File.open("config/multi_theme_settings.yml", 'w') {|f| f.write(text) }
+     APP_THEME = YAML.load_file("config/multi_theme_settings.yml")
   end
     %x{for m in "`ls #{File.expand_path('../../themes',__FILE__)}`"; do echo "options: \\"$m\\"" > #{File.expand_path('../../config/themes.yml',__FILE__)} ; done}
 

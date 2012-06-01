@@ -7,7 +7,7 @@ class Admin::ThemesController < Spree::Admin::BaseController
 
    # Selected Theme name is written into sandbox/config/*.yml file
    def create
-     system "echo theme: \\'#{params[:option]}\\' >  #{Rails.root}/config/settings.yml"
+     system "echo theme: \\'#{params[:option]}\\' >  #{Rails.root}/config/multi_theme_settings.yml"
      if Rails.env == "production"
       system "touch #{Rails.root}/tmp/restart.txt"
       flash[:notice] = "Store Panel layout is Changed as #{params[:option]}"
