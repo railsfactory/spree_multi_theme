@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
   namespace :admin do
-  resources :themes
+  resources :themes , :only => [:new,:create]
   end
 end

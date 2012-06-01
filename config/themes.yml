@@ -1,5 +1,3 @@
-options: "theme1
-theme2
-theme3
-theme4
-theme5"
+options: "spree_brown_theme
+spree_lg_theme
+spree_odg_theme"

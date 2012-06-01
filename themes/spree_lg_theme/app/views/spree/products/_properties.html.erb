@@ -1,0 +1,10 @@
+<% unless product_properties.empty? %>
+      <% for product_property in product_properties %>
+<div class="prod-detail-info">
+    <div class="pvalue">
+        <p class="pattr"><%= product_property.property.presentation %>: <span><%= product_property.value %></span></p>
+    </div>
+</div>
+<% end %>
+<%end%>
+
