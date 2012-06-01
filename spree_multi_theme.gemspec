@@ -2,7 +2,7 @@ Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_multi_theme'
   s.version     = '0.1.0'
-  s.summary     = 'Olive Drab Green Theme is a standalone theme for Spree Commerce'
+  s.summary     = 'Spree Multi Theme is a standalone theme for Spree Commerce'
 
   s.author        = 'Railsfactory'
   s.email         = 'spree@railsfactory.org'

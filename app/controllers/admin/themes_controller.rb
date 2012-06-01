@@ -5,7 +5,7 @@ class Admin::ThemesController < Spree::Admin::BaseController
      @options=THEME_OPTIONS["options"].split(' ')
    end
 
-   # Theme name is write into sandbox/config/*.yml file
+   # Selected Theme name is written into sandbox/config/*.yml file
    def create
      system "echo theme: \\'#{params[:option]}\\' >  #{Rails.root}/config/settings.yml"
      if Rails.env == "production"

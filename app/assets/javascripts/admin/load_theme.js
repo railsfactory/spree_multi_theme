@@ -14,6 +14,6 @@
     $(".theme_options").change(function()
       {
       var theme_name=$(this).val();
-         $("#content").css("background-image","url('/assets/store/"+theme_name+".png')");
+         $("#content").css("background-image","url('/assets/admin/"+theme_name+".png')");
       });
   });
