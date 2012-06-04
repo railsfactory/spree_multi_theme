@@ -5,11 +5,11 @@
     <div class="inner" data-hook="billing_inner">
       <p class="field" id="bfirstname">
         <%= bill_form.label :firstname, t(:first_name) %><span class="req">*</span><br />
-        <%= bill_form.text_field :firstname, :class => 'required' %>
+        <%= bill_form.text_field :firstname, :class => 'required'  , :maxlength => 30%>
       </p>
       <p class="field" id="blastname">
         <%= bill_form.label :lastname, t(:last_name) %><span class="req">*</span><br />
-        <%= bill_form.text_field :lastname, :class => 'required' %>
+        <%= bill_form.text_field :lastname, :class => 'required'  , :maxlength => 30 %>
       </p>
       <% if Spree::Config[:company] %>
         <p class="field" id="bcompany">
@@ -64,11 +64,11 @@
 
       <p class="field" id="bzipcode">
         <%= bill_form.label :zipcode, t(:zip) %><span class="req">*</span><br />
-        <%= bill_form.text_field :zipcode, :class => 'required' %>
+        <%= bill_form.text_field :zipcode, :class => 'required digits' %>
       </p>
       <p class="field" id="bphone">
         <%= bill_form.label :phone, t(:phone) %><span class="req">*</span><br />
-        <%= bill_form.text_field :phone, :class => 'required' %>
+        <%= bill_form.text_field :phone, :class => 'required digits' %>
       </p>
       <% if Spree::Config[:alternative_billing_phone] %>
         <p class="field" id="baltphone">
@@ -94,11 +94,11 @@
     <div class="inner" data-hook="shipping_inner">
       <p class="field" id="sfirstname">
         <%= ship_form.label :firstname, t(:first_name) %><span class="req">*</span><br />
-        <%= ship_form.text_field :firstname, :class => 'required' %>
+        <%= ship_form.text_field :firstname, :class => 'required'  , :maxlength => 30%>
       </p>
       <p class="field" id="slastname">
         <%= ship_form.label :lastname, t(:last_name) %><span class="req">*</span><br />
-        <%= ship_form.text_field :lastname, :class => 'required' %>
+        <%= ship_form.text_field :lastname, :class => 'required'  , :maxlength => 30%>
       </p>
       <% if Spree::Config[:company] %>
         <p class="field" id="scompany">
@@ -153,11 +153,11 @@
 
       <p class="field" id="szipcode">
         <%= ship_form.label :zipcode, t(:zip) %><span class="req">*</span><br />
-        <%= ship_form.text_field :zipcode, :class => 'required' %>
+        <%= ship_form.text_field :zipcode, :class => 'required digits' %>
       </p>
       <p class="field" id="sphone">
         <%= ship_form.label :phone, t(:phone) %><span class="req">*</span><br />
-        <%= ship_form.text_field :phone, :class => 'required' %>
+        <%= ship_form.text_field :phone, :class => 'required digits' %>
       </p>
       <% if Spree::Config[:alternative_shipping_phone] %>
         <p class="field" id="saltphone">

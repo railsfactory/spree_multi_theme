@@ -364,7 +364,8 @@ h4 {color: gray;}
 
 li.nowrap {margin-bottom: 8px;}
 
-#order_summary .steps-data div.columns:first-child {margin-left:0px;}
+
+#order_details .steps-data div.columns:first-child, #order_summary .steps-data div.columns:first-child {margin-left:0px;}
 
 #error_explanation , .errors {
     background-color: #E45353;
@@ -372,3 +373,10 @@ li.nowrap {margin-bottom: 8px;}
 }
 
 #error_explanation h2,#errorExplanation h2, #errorExplanation p {display:none;}
+
+.secblock{margin:0 0 25px 0;}
+.secinblock{padding:10px 10px 0;}
+.myacct-label{float:left; margin:0 15px 0 0; width: 80px;}
+.myacct-field{float:left; margin:0 15px 0 0; width: 290px;}
+.myacct-edit-field{float:left;}
+.myacct-edit-field a {color: #6B8E23; text-decoration: underline;}
