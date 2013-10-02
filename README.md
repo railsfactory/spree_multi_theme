@@ -13,7 +13,7 @@ INSTALLATION
 
 Add the following line to your Gemfile:
 
-    gem 'spree_multi_theme', :git => 'git@github.com:railsfactory/spree_multi_theme.git'
+    gem 'spree_multi_theme', :git => 'https://github.com/railsfactory/spree_multi_theme.git'
 
 NOTE: It's important that you add this line at the bottom of the Gemfile, or at least AFTER any other extension/engine/gem that you'd like to use the theme (i.e. Spree)
 
